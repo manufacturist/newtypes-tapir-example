@@ -15,8 +15,7 @@ object ValidationRuleToValidator {
       case ValidationRule.RegexMatch(regex) =>
         Validator.Pattern[T](regex.regex)
       case ValidationRule.MaxLength(value) => Validator.MaxLength[T](value)
-      case rule =>
-        applyForAll(rule)
+      case rule => applyForAll(rule)
     }
 
   def applyForInt[T <: Int](validationRule: ValidationRule[T]): Validator[T] =

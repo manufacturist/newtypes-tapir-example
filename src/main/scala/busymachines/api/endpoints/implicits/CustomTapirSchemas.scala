@@ -20,7 +20,7 @@ trait CustomTapirSchemas extends TapirCodecCats {
 
   implicit def intSproutSchemaWithValidator[New <: Int: NewType[Int, *]](
       implicit schema: Schema[Int],
-      rule: ValidationRule[New] = null): Schema[New] =
+      rule: ValidationRule[New]): Schema[New] =
     sproutSchema[Int, New].validate(ValidationRuleToValidator.applyForInt(rule))
 
   implicit def anySproutSchemaWithValidator[Old, New: NewType[Old, *]](

@@ -40,7 +40,7 @@ trait CustomTapirSchemas extends TapirCodecCats {
           case Some(original) => Some(s"$original($name)")
         },
         description = Some(
-          s"""<a href="https://github.com/busymachines/newtypes-tapir/types.md#$name" target="_blank">
+          s"""<a href="https://github.com/busymachines/newtypes-tapir-example/TYPES.md#$name" target="_blank">
              |<i>$name docs</i>
              |</a>""".stripMargin
         )

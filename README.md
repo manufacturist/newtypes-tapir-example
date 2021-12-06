@@ -18,6 +18,7 @@ To run the project just do `sbt run`. You should see:
 ```bash
 INFO  yyyy-MM-ddTHH:mm:ss.SSSZ o.h.b.c.n.NIO1SocketServerGroup - Service bound to address /127.0.0.1:9001 
 INFO  yyyy-MM-ddTHH:mm:ss.SSSZ o.h.b.s.BlazeServerBuilder - http4s v0.23.6 on blaze v0.15.2 started at http://127.0.0.1:9001/ 
+Check http://localhost:9001/api/public/docs/index.html 
 ```
 
 You can now check the documentation at 

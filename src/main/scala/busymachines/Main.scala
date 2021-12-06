@@ -20,11 +20,16 @@ object Main extends IOApp {
     val allRoutes = actorRoutes.serverEndpoints ++ movieRoutes.serverEndpoints
     val httpApp = Router("/" -> EndpointsInterpreter(allRoutes)).orNotFound
 
+    val port = 9001
+    val host = "localhost"
+
     BlazeServerBuilder[IO]
-      .bindHttp(9001, "localhost")
+      .bindHttp(port, host)
       .withHttpApp(httpApp)
       .withBanner(List.empty)
       .resource
-      .use(_ => IO.never)
+      .use { _ =>
+        IO.println(s"Check http://$host:$port/api/public/docs/index.html") *> IO.never
+      }
   }
 }

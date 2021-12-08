@@ -12,9 +12,9 @@ object ValidationRuleToValidator {
 
   def applyForString[T <: String](validationRule: ValidationRule[T]): Validator[T] =
     validationRule match {
-      case ValidationRule.RegexMatch(regex) =>
-        Validator.Pattern[T](regex.regex)
+      case ValidationRule.RegexMatch(regex) => Validator.Pattern[T](regex.regex)
       case ValidationRule.MaxLength(value) => Validator.MaxLength[T](value)
+
       case rule => applyForAll(rule)
     }
 

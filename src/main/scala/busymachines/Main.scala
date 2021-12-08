@@ -7,10 +7,14 @@ import cats.effect._
 import org.http4s.blaze.server.BlazeServerBuilder
 import org.http4s.implicits.http4sKleisliResponseSyntaxOptionT
 import org.http4s.server.Router
+import org.log4s.Logger
+import org.typelevel.log4cats.slf4j.Slf4jLogger
 
 import scala.concurrent.ExecutionContext
 
 object Main extends IOApp {
+
+  private val logger = Slf4jLogger.getLogger[IO]
 
   override def run(args: List[String]): IO[ExitCode] = {
 
@@ -29,7 +33,9 @@ object Main extends IOApp {
       .withBanner(List.empty)
       .resource
       .use { _ =>
-        IO.println(s"Check http://$host:$port/api/public/docs/index.html") *> IO.never
+        logger.info(s"Swagger at http://$host:$port/api/public/swagger") *>
+          logger.info(s"Redoc at http://$host:$port/api/public/redoc") *>
+          IO.never
       }
   }
 }

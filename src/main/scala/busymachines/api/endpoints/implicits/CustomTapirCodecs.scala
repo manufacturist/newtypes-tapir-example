@@ -1,15 +1,16 @@
 package busymachines.api.endpoints.implicits
 
-import sprout._
+import monix.newtypes.{HasBuilder, HasExtractor}
 import sttp.tapir.Codec.PlainCodec
 import sttp.tapir._
 
 trait CustomTapirCodecs {
 
-  implicit def sproutCodec[Old, New](
-      implicit nt: NewType[Old, New],
-      codec: PlainCodec[Old],
+  implicit def sproutCodec[New, Base](
+      implicit builder: HasBuilder.Aux[New, Base],
+      extractor: HasExtractor.Aux[New, Base],
+      codec: PlainCodec[Base],
       schema: Schema[New]
   ): PlainCodec[New] =
-    codec.map[New](nt.newType _)(nt.oldType).schema(schema)
+    codec.map(_.asInstanceOf[New])(extractor.extract).schema(schema)
 }

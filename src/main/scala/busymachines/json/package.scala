@@ -4,7 +4,7 @@ import io.circe._
 import io.circe.generic.codec.DerivedAsObjectCodec
 import shapeless.Lazy
 
-package object json extends SproutCodecs {
+package object json extends NewtypesCodecs {
 
   type Codec[A] = io.circe.Codec[A]
 

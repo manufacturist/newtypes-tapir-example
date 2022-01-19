@@ -2,40 +2,39 @@ package busymachines.api.endpoints.implicits
 
 import busymachines.validator.ValidationRule
 import cats.data.NonEmptyList
-import sprout.NewType
+import monix.newtypes._
 import sttp.tapir._
 import sttp.tapir.integ.cats.TapirCodecCats
 
 trait CustomTapirSchemas extends TapirCodecCats {
 
-  implicit def sproutNonEmptyListSchema[Old, New: NewType[Old, *]](
+  implicit def newtypesNonEmptyListSchema[Base, New: HasBuilder.Aux[*, Base]: TypeInfo](
       implicit schema: Schema[New]
   ): Schema[NonEmptyList[New]] =
     schemaForNel[New].copy(description = schema.description)
 
-  implicit def stringSproutSchemaWithValidator[New <: String: NewType[String, *]](
-      implicit schema: Schema[String],
-      rule: ValidationRule[New]
-  ): Schema[New] =
-    sproutSchema[String, New].validate(ValidationRuleToValidator.applyForString(rule))
+  implicit def stringNewtypesSchemaWithValidator[
+      New <: String: HasBuilder.Aux[*, String]: TypeInfo
+  ](implicit schema: Schema[String], rule: ValidationRule[New]): Schema[New] =
+    newtypesSchema[String, New].validate(ValidationRuleToValidator.applyForString(rule))
 
-  implicit def intSproutSchemaWithValidator[New <: Int: NewType[Int, *]](
+  implicit def intNewtypesSchemaWithValidator[New <: Int: HasBuilder.Aux[*, Int]: TypeInfo](
       implicit schema: Schema[Int],
       rule: ValidationRule[New]
   ): Schema[New] =
-    sproutSchema[Int, New].validate(ValidationRuleToValidator.applyForInt(rule))
+    newtypesSchema[Int, New].validate(ValidationRuleToValidator.applyForInt(rule))
 
-  implicit def anySproutSchemaWithValidator[Old, New: NewType[Old, *]](
-      implicit schema: Schema[Old],
+  implicit def anyNewtypesSchemaWithValidator[Base, New: HasBuilder.Aux[*, Base]: TypeInfo](
+      implicit schema: Schema[Base],
       rule: ValidationRule[New] = ValidationRule.pass[New]
   ): Schema[New] =
-    sproutSchema[Old, New].validate(ValidationRuleToValidator.applyForAll(rule))
+    newtypesSchema[Base, New].validate(Validator.pass)
 
-  private def sproutSchema[Old, New: NewType[Old, *]](
-      implicit schema: Schema[Old]
+  private def newtypesSchema[Base, New: HasBuilder.Aux[*, Base]: TypeInfo](
+      implicit schema: Schema[Base]
   ): Schema[New] = {
 
-    val name = NewType[Old, New].symbolicName
+    val name = implicitly[TypeInfo[New]].typeLabel
 
     schema
       .copy(

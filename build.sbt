@@ -6,15 +6,13 @@ version := "1.0.0"
 val http4sV = "0.23.6"
 val logbackV = "1.2.3"
 val log4CatsV = "2.1.1"
-val sproutV = "0.0.5"
+val monixNewtypesV = "0.2.1"
 val tapirV = "0.19.1"
 
 addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.13.2" cross CrossVersion.full)
 
 libraryDependencies ++= Seq(
   "ch.qos.logback" % "logback-classic" % logbackV withSources (),
-  "org.typelevel" %% "log4cats-slf4j" % log4CatsV withSources (),
-  "com.lorandszakacs" %% "sprout" % sproutV withSources (),
   "com.softwaremill.sttp.tapir" %% "tapir-core" % tapirV withSources (),
   "com.softwaremill.sttp.tapir" %% "tapir-json-circe" % tapirV withSources (),
   "com.softwaremill.sttp.tapir" %% "tapir-cats" % tapirV withSources (),
@@ -23,7 +21,7 @@ libraryDependencies ++= Seq(
   "com.softwaremill.sttp.tapir" %% "tapir-openapi-circe-yaml" % tapirV withSources (),
   "com.softwaremill.sttp.tapir" %% "tapir-redoc" % tapirV withSources (),
   "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui" % tapirV withSources (),
-  "org.http4s" %% "http4s-dsl" % http4sV withSources (),
+  "io.monix" %% "newtypes-core" % monixNewtypesV withSources (),
   "org.http4s" %% "http4s-blaze-server" % http4sV withSources (),
-  "org.http4s" %% "http4s-blaze-client" % http4sV withSources ()
+  "org.typelevel" %% "log4cats-slf4j" % log4CatsV withSources ()
 )

@@ -5,17 +5,12 @@ import sttp.tapir._
 
 object ValidationRuleToValidator {
 
-  def applyForAll[T](validationRule: ValidationRule[T]): Validator[T] =
-    validationRule match {
-      case _ => Validator.pass
-    }
-
   def applyForString[T <: String](validationRule: ValidationRule[T]): Validator[T] =
     validationRule match {
       case ValidationRule.RegexMatch(regex) => Validator.Pattern[T](regex.regex)
       case ValidationRule.MaxLength(value) => Validator.MaxLength[T](value)
 
-      case rule => applyForAll(rule)
+      case _ => Validator.pass
     }
 
   def applyForInt[T <: Int](validationRule: ValidationRule[T]): Validator[T] =
@@ -25,6 +20,6 @@ object ValidationRuleToValidator {
         val maxValidator = max.fold(Validator.pass[Int])(Validator.Max(_, exclusive = false))
         minValidator.and(maxValidator).asInstanceOf[Validator[T]]
 
-      case rule => applyForAll(rule)
+      case _ => Validator.pass
     }
 }

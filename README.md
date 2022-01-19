@@ -6,7 +6,7 @@ The goal of this project is to showcase how we can use newtypes with tapir to:
 * Reference field types to external documentation
 
 The used dependencies are
-[sprout (newtypes)](https://github.com/lorandszakacs/sprout), 
+[monix/newtypes](https://github.com/monix/newtypes), 
 [tapir](https://github.com/softwaremill/tapir), 
 [http4s](https://github.com/http4s/http4s), 
 [cats](https://github.com/typelevel/cats), 

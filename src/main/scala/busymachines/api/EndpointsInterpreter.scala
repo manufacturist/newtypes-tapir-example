@@ -40,7 +40,7 @@ object EndpointsInterpreter {
         |4. Swagger documentation links will always open in a new tab
         |
         |## About the libraries
-        |Both [sprout](https://github.com/lorandszakacs/sprout) & [tapir](https://github.com/softwaremill/tapir) 
+        |Both [newtypes](https://github.com/monix/newtypes) & [tapir](https://github.com/softwaremill/tapir) 
         |are on Github.""".stripMargin
     )
 
@@ -78,7 +78,7 @@ object EndpointsInterpreter {
           |[redoc-try extension](https://github.com/wll8/redoc-try) that would enable the `try it` feature.
           |
           |## About the libraries
-          |Both [sprout](https://github.com/lorandszakacs/sprout) & [tapir](https://github.com/softwaremill/tapir) 
+          |Both [newtypes](https://github.com/monix/newtypes) & [tapir](https://github.com/softwaremill/tapir) 
           |are on Github.""".stripMargin
       )
       .extensions(

@@ -7,10 +7,7 @@ import cats.effect._
 import org.http4s.blaze.server.BlazeServerBuilder
 import org.http4s.implicits.http4sKleisliResponseSyntaxOptionT
 import org.http4s.server.Router
-import org.log4s.Logger
 import org.typelevel.log4cats.slf4j.Slf4jLogger
-
-import scala.concurrent.ExecutionContext
 
 object Main extends IOApp {
 
@@ -21,8 +18,8 @@ object Main extends IOApp {
     val actorRoutes = new ActorRoutes(ActorAlgebraNoOp)
     val movieRoutes = new MovieRoutes(MovieAlgebraNoOp)
 
-    val allRoutes = actorRoutes.serverEndpoints ++ movieRoutes.serverEndpoints
-    val httpApp = Router("/" -> EndpointsInterpreter(allRoutes)).orNotFound
+    val allEndpoints = actorRoutes.serverEndpoints ++ movieRoutes.serverEndpoints
+    val httpApp = Router("/" -> EndpointsInterpreter(allEndpoints)).orNotFound
 
     val port = 9001
     val host = "localhost"

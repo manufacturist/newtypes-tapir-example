@@ -1,13 +1,13 @@
-scalaVersion := "2.13.7"
+scalaVersion := "2.13.8"
 name := "newtypes-tapir-cats-example"
 organization := "busymachines"
 version := "1.0.0"
 
-val http4sV = "0.23.6"
-val logbackV = "1.2.3"
-val log4CatsV = "2.1.1"
+val http4sV = "0.23.7"
+val logbackV = "1.2.10"
+val log4CatsV = "2.2.0"
 val monixNewtypesV = "0.2.1"
-val tapirV = "0.19.1"
+val tapirV = "0.20.0-M5"
 
 addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.13.2" cross CrossVersion.full)
 

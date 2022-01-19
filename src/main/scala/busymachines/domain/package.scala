@@ -1,7 +1,7 @@
 package busymachines
 
 import busymachines.validator._
-import monix.newtypes.{BuildFailure, NewsubtypeValidated, NewsubtypeWrapped}
+import monix.newtypes._
 
 import java.util.UUID
 

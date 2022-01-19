@@ -2,8 +2,9 @@ package busymachines.api
 
 import cats.effect.IO
 import org.http4s.HttpRoutes
-import sttp.tapir.{Codec, DecodeResult, DocsExtension}
+import sttp.tapir.{Codec, DecodeResult}
 import sttp.tapir.apispec.ExtensionValue
+import sttp.tapir.docs.apispec.DocsExtension
 import sttp.tapir.server._
 import sttp.tapir.docs.openapi.OpenAPIDocsInterpreter
 import sttp.tapir.openapi.Info
@@ -53,7 +54,7 @@ object EndpointsInterpreter {
 
     SwaggerUI[IO](
       yaml = openApiYaml,
-      prefix = "api" :: "public" :: "swagger" :: Nil
+      pathPrefix = "api" :: "public" :: "swagger" :: Nil
     )
   }
 

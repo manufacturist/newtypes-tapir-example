@@ -24,7 +24,7 @@ object ActorEndpoints {
           .example(
             List(
               CreateActor(
-                code = ActorCode("MTX905"),
+                code = ActorCode.unsafe("MTX905"),
                 name = FullName("Keanu Reeves"),
                 age = Age(57)
               )
@@ -49,7 +49,7 @@ object ActorEndpoints {
             Some(
               Actor(
                 id = ActorId(UUID.randomUUID()),
-                code = ActorCode("MTX905"),
+                code = ActorCode.unsafe("MTX905"),
                 name = FullName("Keanu Reeves"),
                 age = Age(57)
               )

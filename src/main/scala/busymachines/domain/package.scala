@@ -1,7 +1,7 @@
 package busymachines
 
 import busymachines.validator._
-import monix.newtypes.NewsubtypeWrapped
+import monix.newtypes.{BuildFailure, NewsubtypeValidated, NewsubtypeWrapped}
 
 import java.util.UUID
 
@@ -14,9 +14,19 @@ package object domain {
   type ActorId = ActorId.Type
 
   type ActorCode = ActorCode.Type
-  object ActorCode extends NewsubtypeWrapped[String] {
+  object ActorCode extends NewsubtypeValidated[String] {
+
+    private val actorCodeRegex = "[A-Z]{3}\\d{3}".r
+
+    def apply(value: String): Either[BuildFailure[Type], Type] = {
+      println(s"$value validated in newtypes")
+
+      if (actorCodeRegex.matches(value)) Right(unsafeCoerce(value))
+      else Left(BuildFailure[Type](s"$value doesn't match $actorCodeRegex pattern"))
+    }
+
     implicit val vr: ValidationRule[Type] =
-      ValidationRule.RegexMatch("[A-Z]{3}\\d{3}".r)
+      ValidationRule.RegexMatch(actorCodeRegex)
   }
 
   type FullName = FullName.Type

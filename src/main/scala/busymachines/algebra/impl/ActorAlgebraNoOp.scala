@@ -16,7 +16,7 @@ object ActorAlgebraNoOp extends ActorAlgebra {
       Some(
         Actor(
           id = ActorId(UUID.fromString("f1914228-c8ca-4cfb-a7da-7d31bcd13e19")),
-          code = ActorCode("THR742"),
+          code = ActorCode.unsafe("THR742"),
           name = FullName("Brad Pitt"),
           age = Age(57)
         )

@@ -37,7 +37,7 @@ object MovieAlgebraNoOp extends MovieAlgebra {
         title = Title("Newtypes + Tapir = <3"),
         actors = Actor(
           id = actorId,
-          code = ActorCode("SQG388"),
+          code = ActorCode.unsafe("SQG388"),
           name = FullName("Scala Community"),
           age = Age(17)
         ) :: Nil

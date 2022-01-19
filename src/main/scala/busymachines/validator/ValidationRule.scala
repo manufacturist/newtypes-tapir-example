@@ -1,7 +1,5 @@
 package busymachines.validator
 
-import monix.newtypes.NewsubtypeWrapped
-
 import scala.util.matching.Regex
 
 sealed trait ValidationRule[T]

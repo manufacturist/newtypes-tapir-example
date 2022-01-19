@@ -7,7 +7,18 @@ object ValidationRuleToValidator {
 
   def applyForString[T <: String](validationRule: ValidationRule[T]): Validator[T] =
     validationRule match {
-      case ValidationRule.RegexMatch(regex) => Validator.Pattern[T](regex.regex)
+      case ValidationRule.RegexMatch(regex) =>
+        new Validator.Pattern[T](regex.regex) {
+          override def apply(t: T): List[ValidationError[_]] = {
+            println(s"$t validated in tapir")
+
+            if (t.matches(value)) {
+              List.empty
+            } else {
+              List(ValidationError.Primitive(this, t))
+            }
+          }
+        }
       case ValidationRule.MaxLength(value) => Validator.MaxLength[T](value)
 
       case _ => Validator.pass

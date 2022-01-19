@@ -1,6 +1,7 @@
 # Newtypes Tapir Example
 
 The goal of this project is to showcase how we can use newtypes with tapir to:
+* Improve our domain model reasoning
 * Enhance type descriptions
 * Add a basic implementation of validation rules
 * Reference field types to external documentation
